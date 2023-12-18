@@ -1,7 +1,8 @@
 import random
 
 
-def gift_randomizer(persons: list):
+def gift_randomizer(file_name: str, persons: list):
+    pairs = ''
     donors = persons[::-1]
     for i in range(len(donors)):
         donor = donors[i]
@@ -11,14 +12,21 @@ def gift_randomizer(persons: list):
                 continue
             recipient = persons.pop(random_i)
             break
-        print(f'{donor} дарує {recipient}')
-    print('_' * 20)
+        pair = f'{donor} makes gift to {recipient}\n'
+        pairs += pair
+        
+    with open(file_name, 'a+') as fd:
+        fd.writelines(pairs)
+
+        
+    print('Pairs created /...')
 
 
 def main():
     
-    persons = ['Олексій', 'Катя До.', 'Юля', 'Настя', 'Надя', 'Андрій', 'Родіон', 'Саня']
-    gift_randomizer(persons)
+    persons = ['Olexiy', 'Kate Do.', 'Yulia', 'Pypok', 'Nadia', 'Andriy', 'Rodion', 'Sashka', 'Ihor', 'Kate Ro.']
+    file_name = 'gift_pairs.txt'
+    gift_randomizer(file_name, persons)
     
     
 if __name__ == '__main__':
